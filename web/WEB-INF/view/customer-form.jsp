@@ -31,7 +31,7 @@
         <label>Last name: </label><form:input path="lastName"></form:input><br>
         <label>Email: </label><form:input path="email"></form:input><br>
         <input type="submit" value="save" class="save">
-        <input type="button" value="cancel" class="save" onclick="window.location.href='/customer/list'; return false;">
+        <input type="button" value="cancel+test" class="save" onclick="window.location.href='/customer/list'; return false;">
     </form:form>
 </div>
 </body>
