@@ -48,9 +48,15 @@
         </form:form>
         <table>
             <tr>
+                <th>Language</th>
                 <th>Word</th>
                 <th>Translation</th>
+                <th>Sentence</th>
+                <th>Known Level</th>
+                <th>Source</th>
+
                 <th>Action</th>
+
             </tr>
 
             <c:forEach var="iter" items="${words}">
@@ -63,8 +69,13 @@
                 <%--</c:url>--%>
 
                 <tr>
+                    <td>${iter.language}</td>
                     <td>${iter.word}</td>
                     <td>${iter.translation}</td>
+                    <td>${iter.sentence}</td>
+                    <td>${iter.knownLevel}</td>
+                    <td>${iter.source}</td>
+
                     <td><a href="${updateLink}">update</a>
                     |
                     <a href="${deleteLink}"
