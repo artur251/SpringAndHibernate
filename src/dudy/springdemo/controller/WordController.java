@@ -24,7 +24,8 @@ public class WordController {
     public String listWords(Model model){
         List<Word> words = service.getWords();
 
-        String zdanie = "Alama kota";
+        String zdanie = "Ala ma kota itd.";
+        model.addAttribute("zdanie", zdanie);
 
         ArrayList<String> wordx = new ArrayList<>();
         wordx.add("Ala");

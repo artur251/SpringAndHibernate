@@ -28,11 +28,11 @@
                onclick="window.location.href='/customer/showFormForAdd'; return false;"/>
         <form:form action="search" method="POST">
             Search customer: <input type="text" name="theSearchName" />
-            <h1>Moja strona WORD !!!!!!!!!!!!!</h1>
 
             <input type="submit" value="Search" class="add-button" />
 
 
+        <h1>Zdanie do analizy: ${zdanie}</h1>
         <table>
             <tr>
                 <th>Słowa ze zdania</th>
