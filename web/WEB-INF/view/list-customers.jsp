@@ -30,6 +30,19 @@
             Search customer: <input type="text" name="theSearchName" />
 
             <input type="submit" value="Search" class="add-button" />
+
+        <table>
+            <tr>
+                <th>Słowa ze zdania</th>
+            </tr>
+            <c:forEach var="word" items="${words}">
+                <tr>
+                    <td>${word}</td>
+                </tr>
+            </c:forEach>
+        </table>
+
+
         </form:form>
         <table>
             <tr>
@@ -55,8 +68,6 @@
                     |
                     <a href="${deleteLink}"
                     onclick="if(!confirm('Are you sure u want to delete?'))return false">delete</a></td>
-
-
                 </tr>
             </c:forEach>
         </table>

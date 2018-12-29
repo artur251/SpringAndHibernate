@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +23,22 @@ public class CustomerController {
     @GetMapping("/list")
     public String listCustomers(Model model){
         List<Customer> customers = service.getCustomers();
+
+        String zdanie = "Alama kota";
+
+        ArrayList<String> words = new ArrayList<>();
+        words.add("Ala");
+        words.add("ma");
+        words.add("kota");
+        words.add("i");
+        words.add("kot");
+        words.add("ma");
+        words.add("też");
+        words.add("Alę");
+
+
+        model.addAttribute("words", words);
+
         model.addAttribute("customers", customers);
         return "list-customers";
     }
