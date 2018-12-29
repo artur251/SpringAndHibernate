@@ -5,5 +5,5 @@
   Time: 18:25
   To change this template use File | Settings | File Templates.
 --%>
-<% response.sendRedirect("/customer/list");%>
+<% response.sendRedirect("/word/list");%>
 

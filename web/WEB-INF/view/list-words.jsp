@@ -28,43 +28,43 @@
                onclick="window.location.href='/customer/showFormForAdd'; return false;"/>
         <form:form action="search" method="POST">
             Search customer: <input type="text" name="theSearchName" />
+            <h1>Moja strona WORD !!!!!!!!!!!!!</h1>
 
             <input type="submit" value="Search" class="add-button" />
 
 
-        <%--<table>--%>
-            <%--<tr>--%>
-                <%--<th>Słowa ze zdania</th>--%>
-            <%--</tr>--%>
-            <%--<c:forEach var="word" items="${words}">--%>
-                <%--<tr>--%>
-                    <%--<td>${word}</td>--%>
-                <%--</tr>--%>
-            <%--</c:forEach>--%>
-        <%--</table>--%>
+        <table>
+            <tr>
+                <th>Słowa ze zdania</th>
+            </tr>
+            <c:forEach var="iter" items="${wordx}">
+                <tr>
+                    <td>${iter}</td>
+                </tr>
+            </c:forEach>
+        </table>
 
 
         </form:form>
         <table>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email Name</th>
+                <th>Word</th>
+                <th>Translation</th>
                 <th>Action</th>
             </tr>
 
-            <c:forEach var="iter" items="${customers}">
-                <c:url var="updateLink" value="/customer/showFormForUpdate">
-                    <c:param name="customerId" value="${iter.id}"/>
-                </c:url>
-                <c:url var="deleteLink" value="/customer/deleteCustomer">
-                    <c:param name="customerToDeleteId" value="${iter.id}"/>
-                </c:url>
+            <c:forEach var="iter" items="${words}">
+
+                <%--<c:url var="updateLink" value="/customer/showFormForUpdate">--%>
+                    <%--<c:param name="customerId" value="${iter.id}"/>--%>
+                <%--</c:url>--%>
+                <%--<c:url var="deleteLink" value="/customer/deleteCustomer">--%>
+                    <%--<c:param name="customerToDeleteId" value="${iter.id}"/>--%>
+                <%--</c:url>--%>
 
                 <tr>
-                    <td>${iter.name}</td>
-                    <td>${iter.lastName}</td>
-                    <td>${iter.email}</td>
+                    <td>${iter.word}</td>
+                    <td>${iter.translation}</td>
                     <td><a href="${updateLink}">update</a>
                     |
                     <a href="${deleteLink}"

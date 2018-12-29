@@ -1,9 +1,9 @@
 package dudy.springdemo.controller;
 
-import dudy.springdemo.dao.CustomerDao;
-import dudy.springdemo.dao.CustomerDaoImpl;
 import dudy.springdemo.entity.Customer;
+import dudy.springdemo.entity.Word;
 import dudy.springdemo.service.CustomerService;
+import dudy.springdemo.service.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,29 +16,31 @@ import java.util.List;
  * Created by admin on 11.11.2018.
  */
 @Controller
-@RequestMapping("/customer")
-public class CustomerController {
+@RequestMapping("/word")
+public class WordController {
     @Autowired
-    CustomerService service;
+    WordService service;
     @GetMapping("/list")
-    public String listCustomers(Model model){
-        List<Customer> customers = service.getCustomers();
+    public String listWords(Model model){
+        List<Word> words = service.getWords();
 
-//        String zdanie = "Alama kota";
-//        ArrayList<String> words = new ArrayList<>();
-//        words.add("Ala");
-//        words.add("ma");
-//        words.add("kota");
-//        words.add("i");
-//        words.add("kot");
-//        words.add("ma");
-//        words.add("też");
-//        words.add("Alę");
-//        model.addAttribute("words", words);
+        String zdanie = "Alama kota";
 
-        model.addAttribute("customers", customers);
-        return "list-customers";
+        ArrayList<String> wordx = new ArrayList<>();
+        wordx.add("Ala");
+        wordx.add("ma");
+        wordx.add("kota");
+        wordx.add("i");
+        wordx.add("kot");
+        wordx.add("ma");
+        wordx.add("też");
+        wordx.add("Alę");
+        model.addAttribute("wordx", wordx);
+
+        model.addAttribute("words", words);
+        return "list-words";
     }
+/*
     @RequestMapping("/showFormForAdd")
     public String formForAdd(Model model){
         Customer theCustomer = new Customer();
@@ -69,4 +71,5 @@ public class CustomerController {
         model.addAttribute("customers", selectedCustomers);
         return "list-customers";
     }
+*/
 }
