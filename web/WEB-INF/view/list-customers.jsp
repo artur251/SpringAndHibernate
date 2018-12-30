@@ -36,7 +36,7 @@
             <%--<tr>--%>
                 <%--<th>Słowa ze zdania</th>--%>
             <%--</tr>--%>
-            <%--<c:forEach var="word" items="${words}">--%>
+            <%--<c:forEach var="word" items="${translations}">--%>
                 <%--<tr>--%>
                     <%--<td>${word}</td>--%>
                 <%--</tr>--%>

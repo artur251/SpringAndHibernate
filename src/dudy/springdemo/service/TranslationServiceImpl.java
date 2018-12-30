@@ -1,9 +1,7 @@
 package dudy.springdemo.service;
 
-import dudy.springdemo.dao.CustomerDao;
-import dudy.springdemo.dao.WordDao;
-import dudy.springdemo.entity.Customer;
-import dudy.springdemo.entity.Word;
+import dudy.springdemo.dao.TranslationDao;
+import dudy.springdemo.entity.Translation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,19 +12,19 @@ import java.util.List;
  * Created by admin on 12.11.2018.
  */
 @Service
-public class WordServiceImpl implements WordService{
+public class TranslationServiceImpl implements TranslationService {
     @Autowired
-    private WordDao wordDao;
+    private TranslationDao translationDao;
     @Override
     @Transactional
-    public List<Word> getWords() {
-        return wordDao.getWords();
+    public List<Translation> getWords() {
+        return translationDao.getWords();
     }
 
     @Override
     @Transactional
-    public List<Word> getWord(String item) {
-        return wordDao.getWord(item);
+    public List<Translation> getWord(String item) {
+        return translationDao.getWord(item);
     }
 /*
     @Override

@@ -8,7 +8,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "words")
-public class Word {
+public class Translation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -30,11 +30,10 @@ public class Word {
     @Column(name = "timestamp_update")
     Date timestampUpdate;
 
-    public Word() {
-        this.word = word;
+    public Translation() {
     }
 
-    public Word(int id, String word, String language, String source, String sentence, String translation, int knownLevel, Date timestampInsert, Date timestampUpdate) {
+    public Translation(int id, String word, String language, String source, String sentence, String translation, int knownLevel, Date timestampInsert, Date timestampUpdate) {
         this.id = id;
         this.word = word;
         this.language = language;
@@ -120,7 +119,7 @@ public class Word {
 
     @Override
     public String toString() {
-        return "Word{" +
+        return "Translation{" +
                 "id=" + id +
                 ", word='" + word + '\'' +
                 ", language='" + language + '\'' +

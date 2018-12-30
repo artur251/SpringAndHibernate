@@ -1,7 +1,6 @@
 package dudy.springdemo.dao;
 
-import dudy.springdemo.entity.Customer;
-import dudy.springdemo.entity.Word;
+import dudy.springdemo.entity.Translation;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -14,25 +13,25 @@ import java.util.List;
  * Created by admin on 11.11.2018.
  */
 @Repository
-public class WordDaoImpl implements WordDao {
+public class TranslationDaoImpl implements TranslationDao {
     @Autowired
     SessionFactory sessionFactory;
     @Override
-    public List<Word> getWords() {
+    public List<Translation> getWords() {
         Session session = sessionFactory.getCurrentSession();
-        Query<Word> query = session.createQuery("from Word order by timestamp_update", Word.class);
-        List<Word> words = query.getResultList();
-        return words;
+        Query<Translation> query = session.createQuery("from Translation order by timestampUpdate", Translation.class);
+        List<Translation> translations = query.getResultList();
+        return translations;
     }
 
     @Override
-    public List<Word> getWord(String wordx) {
+    public List<Translation> getWord(String wordx) {
         Session session = sessionFactory.getCurrentSession();
-        Query<Word> query = session.createQuery("from Word where word=:wordx order by timestamp_update", Word.class);
+        Query<Translation> query = session.createQuery("from Translation where word=:wordx order by timestampUpdate", Translation.class);
         query.setString("wordx", wordx);
 //        query= session.createQuery("FROM Customer c where c.name LIKE CONCAT('%', :theName, '%')");
-        List<Word> words = query.getResultList();
-        return words;
+        List<Translation> translations = query.getResultList();
+        return translations;
     }
 
 

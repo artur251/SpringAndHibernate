@@ -32,7 +32,8 @@
             <input type="submit" value="Search" class="add-button" />
 
 
-        <h1>Zdanie do analizy: ${sentence}</h1>
+        <h1>Zdanie do analizy:</h1>
+            <h2>${sentence}</h2>
         <table>
             <tr>
                 <th>Słowa ze zdania</th>
@@ -59,7 +60,7 @@
 
             </tr>
 
-            <c:forEach var="iter" items="${words}">
+            <c:forEach var="iter" items="${translations}">
 
                 <%--<c:url var="updateLink" value="/customer/showFormForUpdate">--%>
                     <%--<c:param name="customerId" value="${iter.id}"/>--%>

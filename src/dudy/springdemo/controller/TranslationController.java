@@ -1,9 +1,7 @@
 package dudy.springdemo.controller;
 
-import dudy.springdemo.entity.Customer;
-import dudy.springdemo.entity.Word;
-import dudy.springdemo.service.CustomerService;
-import dudy.springdemo.service.WordService;
+import dudy.springdemo.entity.Translation;
+import dudy.springdemo.service.TranslationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +16,21 @@ import java.util.Scanner;
  */
 @Controller
 @RequestMapping("/word")
-public class WordController {
+public class TranslationController {
     @Autowired
-    WordService service;
+    TranslationService service;
     @GetMapping("/list")
     public String listWords(Model model){
-        List<Word> words = service.getWords();
+        List<Translation> translations = service.getWords();
+
+        for (Translation t :translations
+             ) {
+            System.out.println("test translations jest="+t);
+        }
+
+
+
+
 
         String sentence = "Andrew Strauss stepped down from his position as director of cricket with the England and Wales Cricket Board in October in order to spend more time with her as she fought the condition.";
         System.out.println("sentence="+sentence);
@@ -37,18 +44,19 @@ public class WordController {
         for (String item:sentenceWords
              ) {
             System.out.println("Dla sentenceWords="+item);
-            List<Word> wordsInTable = service.getWord(item);
-            for (Word www:wordsInTable
+            List<Translation> wordsInTable = service.getWord(item);
+            for (Translation www:wordsInTable
                  ) {
                 System.out.println(" w tabeli jest="+www);
             }
+            //System.out.println(item+" -> " + GoogleTranslate.translate("pl", item));
         }
 
 
 
         model.addAttribute("sentence", sentence);
         model.addAttribute("sentenceWords", sentenceWords);
-        model.addAttribute("words", words);
+        model.addAttribute("translations", translations);
         return "list-words";
     }
 /*
