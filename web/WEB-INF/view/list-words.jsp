@@ -32,12 +32,12 @@
             <input type="submit" value="Search" class="add-button" />
 
 
-        <h1>Zdanie do analizy: ${zdanie}</h1>
+        <h1>Zdanie do analizy: ${sentence}</h1>
         <table>
             <tr>
                 <th>Słowa ze zdania</th>
             </tr>
-            <c:forEach var="iter" items="${wordx}">
+            <c:forEach var="iter" items="${sentenceWords}">
                 <tr>
                     <td>${iter}</td>
                 </tr>

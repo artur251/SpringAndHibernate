@@ -10,6 +10,9 @@ import java.util.Date;
 @Table(name = "words")
 public class Word {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    int id;
     @Column(name = "word")
     String word;
     @Column(name = "language")
@@ -31,7 +34,8 @@ public class Word {
         this.word = word;
     }
 
-    public Word(String word, String language, String source, String sentence, String translation, int knownLevel, Date timestampInsert, Date timestampUpdate) {
+    public Word(int id, String word, String language, String source, String sentence, String translation, int knownLevel, Date timestampInsert, Date timestampUpdate) {
+        this.id = id;
         this.word = word;
         this.language = language;
         this.source = source;
@@ -40,6 +44,14 @@ public class Word {
         this.knownLevel = knownLevel;
         this.timestampInsert = timestampInsert;
         this.timestampUpdate = timestampUpdate;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getWord() {
@@ -109,7 +121,8 @@ public class Word {
     @Override
     public String toString() {
         return "Word{" +
-                "word='" + word + '\'' +
+                "id=" + id +
+                ", word='" + word + '\'' +
                 ", language='" + language + '\'' +
                 ", source='" + source + '\'' +
                 ", sentence='" + sentence + '\'' +

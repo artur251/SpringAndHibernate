@@ -9,7 +9,8 @@ import java.util.List;
  * Created by admin on 11.11.2018.
  */
 public interface WordDao {
-    public List<Word> getWords();
+    List<Word> getWords();
+    List<Word> getWord(String item);
 /*
     void addCustomer(Customer customer);
     Customer getCustomer(int theId);

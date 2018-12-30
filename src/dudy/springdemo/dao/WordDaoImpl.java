@@ -24,7 +24,20 @@ public class WordDaoImpl implements WordDao {
         List<Word> words = query.getResultList();
         return words;
     }
-/*
+
+    @Override
+    public List<Word> getWord(String wordx) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<Word> query = session.createQuery("from Word where word=:wordx order by timestamp_update", Word.class);
+        query.setString("wordx", wordx);
+//        query= session.createQuery("FROM Customer c where c.name LIKE CONCAT('%', :theName, '%')");
+        List<Word> words = query.getResultList();
+        return words;
+    }
+
+
+
+    /*
     @Override
     public void addCustomer(Customer customer) {
         Session session = sessionFactory.getCurrentSession();

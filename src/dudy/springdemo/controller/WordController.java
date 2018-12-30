@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by admin on 11.11.2018.
@@ -24,20 +25,29 @@ public class WordController {
     public String listWords(Model model){
         List<Word> words = service.getWords();
 
-        String zdanie = "Ala ma kota itd.";
-        model.addAttribute("zdanie", zdanie);
+        String sentence = "Andrew Strauss stepped down from his position as director of cricket with the England and Wales Cricket Board in October in order to spend more time with her as she fought the condition.";
+        System.out.println("sentence="+sentence);
+        Scanner scanner = new Scanner(sentence);
+        ArrayList<String> sentenceWords = new ArrayList<>();
+        while (scanner.hasNext()) {
+            sentenceWords.add(scanner.next());
+        }
 
-        ArrayList<String> wordx = new ArrayList<>();
-        wordx.add("Ala");
-        wordx.add("ma");
-        wordx.add("kota");
-        wordx.add("i");
-        wordx.add("kot");
-        wordx.add("ma");
-        wordx.add("też");
-        wordx.add("Alę");
-        model.addAttribute("wordx", wordx);
 
+        for (String item:sentenceWords
+             ) {
+            System.out.println("Dla sentenceWords="+item);
+            List<Word> wordsInTable = service.getWord(item);
+            for (Word www:wordsInTable
+                 ) {
+                System.out.println(" w tabeli jest="+www);
+            }
+        }
+
+
+
+        model.addAttribute("sentence", sentence);
+        model.addAttribute("sentenceWords", sentenceWords);
         model.addAttribute("words", words);
         return "list-words";
     }

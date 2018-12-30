@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface WordService {
     public List<Word> getWords();
+    public List<Word> getWord(String item);
 /*
     void addCustomer(Customer theCustomer);
     Customer getCustomer(int theId);
