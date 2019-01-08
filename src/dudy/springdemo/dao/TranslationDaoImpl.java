@@ -1,12 +1,14 @@
 package dudy.springdemo.dao;
 
 import dudy.springdemo.entity.Translation;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,18 +19,33 @@ public class TranslationDaoImpl implements TranslationDao {
     @Autowired
     SessionFactory sessionFactory;
     @Override
-    public List<Translation> getWords() {
-        Session session = sessionFactory.getCurrentSession();
+    public List<Translation> getTranslations() {
+        //Session session = sessionFactory.getCurrentSession();
+        Session session;
+        try {
+            session = sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
+
         Query<Translation> query = session.createQuery("from Translation order by timestampUpdate", Translation.class);
         List<Translation> translations = query.getResultList();
         return translations;
     }
 
     @Override
-    public List<Translation> getWord(String wordx) {
-        Session session = sessionFactory.getCurrentSession();
-        Query<Translation> query = session.createQuery("from Translation where word=:wordx order by timestampUpdate", Translation.class);
-        query.setString("wordx", wordx);
+    public List<Translation> getTranslationsForIdWord(int idWordx) {
+        //Session session = sessionFactory.getCurrentSession();
+        Session session;
+        try {
+            session = sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
+
+
+        Query<Translation> query = session.createQuery("from Translation where idWord=:idWordx order by timestampUpdate", Translation.class);
+        query.setInteger("idWordx", idWordx);
 //        query= session.createQuery("FROM Customer c where c.name LIKE CONCAT('%', :theName, '%')");
         List<Translation> translations = query.getResultList();
         return translations;

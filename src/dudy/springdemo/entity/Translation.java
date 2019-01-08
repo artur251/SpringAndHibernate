@@ -7,24 +7,22 @@ import java.util.Date;
  * Created by admin on 11.11.2018.
  */
 @Entity
-@Table(name = "words")
+@Table(name = "translations")
 public class Translation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     int id;
-    @Column(name = "word")
-    String word;
     @Column(name = "language")
     String language;
-    @Column(name = "source")
-    String source;
+    @Column(name = "id_source")
+    int idSource;
+    @Column(name = "id_word")
+    int idWord;
     @Column(name = "sentence")
     String sentence;
     @Column(name = "translation")
     String translation;
-    @Column(name = "known_level")
-    int knownLevel;
     @Column(name = "timestamp_insert")
     Date timestampInsert;
     @Column(name = "timestamp_update")
@@ -33,14 +31,15 @@ public class Translation {
     public Translation() {
     }
 
-    public Translation(int id, String word, String language, String source, String sentence, String translation, int knownLevel, Date timestampInsert, Date timestampUpdate) {
-        this.id = id;
-        this.word = word;
+    public Translation(String translation) {
+        this.translation = translation;
+    }
+
+    public Translation(String language, int idSource, String sentence, String translation, Date timestampInsert, Date timestampUpdate) {
         this.language = language;
-        this.source = source;
+        this.idSource = idSource;
         this.sentence = sentence;
         this.translation = translation;
-        this.knownLevel = knownLevel;
         this.timestampInsert = timestampInsert;
         this.timestampUpdate = timestampUpdate;
     }
@@ -53,14 +52,6 @@ public class Translation {
         this.id = id;
     }
 
-    public String getWord() {
-        return word;
-    }
-
-    public void setWord(String word) {
-        this.word = word;
-    }
-
     public String getLanguage() {
         return language;
     }
@@ -69,12 +60,12 @@ public class Translation {
         this.language = language;
     }
 
-    public String getSource() {
-        return source;
+    public int getIdSource() {
+        return idSource;
     }
 
-    public void setSource(String source) {
-        this.source = source;
+    public void setIdSource(int idSource) {
+        this.idSource = idSource;
     }
 
     public String getSentence() {
@@ -91,14 +82,6 @@ public class Translation {
 
     public void setTranslation(String translation) {
         this.translation = translation;
-    }
-
-    public int getKnownLevel() {
-        return knownLevel;
-    }
-
-    public void setKnownLevel(int knownLevel) {
-        this.knownLevel = knownLevel;
     }
 
     public Date getTimestampInsert() {
@@ -121,12 +104,10 @@ public class Translation {
     public String toString() {
         return "Translation{" +
                 "id=" + id +
-                ", word='" + word + '\'' +
                 ", language='" + language + '\'' +
-                ", source='" + source + '\'' +
+                ", idSource=" + idSource +
                 ", sentence='" + sentence + '\'' +
                 ", translation='" + translation + '\'' +
-                ", knownLevel=" + knownLevel +
                 ", timestampInsert=" + timestampInsert +
                 ", timestampUpdate=" + timestampUpdate +
                 '}';

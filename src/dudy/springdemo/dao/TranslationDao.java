@@ -2,14 +2,15 @@ package dudy.springdemo.dao;
 
 import dudy.springdemo.entity.Translation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by admin on 11.11.2018.
  */
 public interface TranslationDao {
-    List<Translation> getWords();
-    List<Translation> getWord(String item);
+    List<Translation> getTranslations();
+    List<Translation> getTranslationsForIdWord(int idWordx);
 /*
     void addCustomer(Customer customer);
     Customer getCustomer(int theId);

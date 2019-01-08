@@ -8,8 +8,8 @@ import java.util.List;
  * Created by admin on 12.11.2018.
  */
 public interface TranslationService {
-    public List<Translation> getWords();
-    public List<Translation> getWord(String item);
+    public List<Translation> getTranslations();
+    public List<Translation> getTranslationsForIdWord(int id);
 /*
     void addCustomer(Customer theCustomer);
     Customer getCustomer(int theId);
