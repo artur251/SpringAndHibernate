@@ -34,31 +34,33 @@
 
             <h1>Zdanie do analizy:</h1>
             <h2>${sentence}</h2>
-            <table>
-                <tr>
-                    <th>Słowa ze zdania</th>
-                </tr>
-                <c:forEach var="iter" items="${sentenceWords}">
-                    <tr>
-                        <td>${iter}</td>
-                    </tr>
-                </c:forEach>
-            </table>
+
+
+            <%--<table>--%>
+                <%--<tr>--%>
+                    <%--<th>Słowa ze zdania</th>--%>
+                <%--</tr>--%>
+                <%--<c:forEach var="iter" items="${sentenceWords}">--%>
+                    <%--<tr>--%>
+                        <%--<td>${iter}</td>--%>
+                    <%--</tr>--%>
+                <%--</c:forEach>--%>
+            <%--</table>--%>
 
 
         </form:form>
         <table>
-            <tr>
-                <th>Language</th>
-                <th>Word</th>
-                <th>Translation</th>
-                <th>Sentence</th>
-                <th>Known Level</th>
-                <th>Source</th>
+            <%--<tr>--%>
+                <%--<th>Language</th>--%>
+                <%--<th>Word</th>--%>
+                <%--<th>Translation</th>--%>
+                <%--<th>Sentence</th>--%>
+                <%--<th>Known Level</th>--%>
+                <%--<th>Source</th>--%>
 
-                <th>Action</th>
+                <%--<th>Action</th>--%>
 
-            </tr>
+            <%--</tr>--%>
 
             <%--<c:forEach var="iter" items="${translations}">--%>
 
@@ -89,13 +91,17 @@
         <table>
             <tr>
                 <th>Słowo</th>
-                <th>TłumaczenieXXX</th>
+                <th>Poziom poznania</th>
+                <th>Tłumaczenie</th>
             </tr>
 
             <c:forEach var="iter" items="${wordTranslationsAll}">
                 <tr>
                     <td>
                             ${iter.word.word}
+                    </td>
+                    <td>
+                            ${iter.word.knownLevel}
                     </td>
                     <td>
 

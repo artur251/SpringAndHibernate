@@ -17,8 +17,8 @@ public class Translation {
     String language;
     @Column(name = "id_source")
     int idSource;
-    @Column(name = "id_word")
-    int idWord;
+//    @Column(name = "id_word")
+//    int idWord;
     @Column(name = "sentence")
     String sentence;
     @Column(name = "translation")
@@ -27,6 +27,11 @@ public class Translation {
     Date timestampInsert;
     @Column(name = "timestamp_update")
     Date timestampUpdate;
+
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
+    @JoinColumn(name = "id_word")
+    private Word word;
 
     public Translation() {
     }

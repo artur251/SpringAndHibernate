@@ -45,19 +45,13 @@ public class WordTranslationController {
         ArrayList<String> sentenceWords = new ArrayList<>();
         while (scanner.hasNext()) {
             sentenceWords.add(scanner.next());
-
         }
-
 
         List<WordTranslation> wordTranslationsAll =  new ArrayList<WordTranslation>();
         List<WordTranslation> wordTranslations =  new ArrayList<WordTranslation>();
-
         for (String wordi:sentenceWords
-             ) {
+        ) {
             System.out.println("Dla getWordTranslations wordi="+wordi);
-
-            ///wordTranslations=wordTranslationService.getWordTranslations(wordi);
-
             List<Word> wordArrayList= new ArrayList<Word>();
             wordArrayList=wordService.getWord(wordi);
 
@@ -66,25 +60,24 @@ public class WordTranslationController {
 
             if (!wordArrayList.isEmpty()) {
                 wordt=wordArrayList.get(0);
-                translationsT = translationService.getTranslationsForIdWord(wordt.getId());
+                translationsT = wordArrayList.get(0).getTranslations();
             }
             else
             {
                 wordt.setWord(wordi);
-                translationsT.add(new Translation("-"));
+                translationsT.add(new Translation("Google:..."));
+
+
+                //System.out.println(wordi+" -> " + GoogleTranslate.translate("pl", wordi));
+
+
             }
-
-
             wordTranslationsAll.add(new WordTranslation(wordt,translationsT));
-
         }
-
         for (WordTranslation wtt:wordTranslationsAll
-             ) {
+        ) {
             System.out.println("wordTranslationsAll="+wtt);
         }
-
-
 
 //        for (String item:sentenceWords
 //             ) {

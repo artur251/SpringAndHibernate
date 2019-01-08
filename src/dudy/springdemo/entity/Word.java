@@ -1,7 +1,9 @@
 package dudy.springdemo.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "words")
@@ -22,6 +24,12 @@ public class Word {
     @Column(name = "timestamp_update")
     Date timestampUpdate;
 
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
+//    @JoinColumn(name = "id")
+//    private Translation translation;
+
+    @OneToMany(mappedBy = "word", cascade = {CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
+    private List<Translation> translations = new ArrayList<>();
 
     public Word() {
     }
@@ -86,6 +94,14 @@ public class Word {
         this.timestampUpdate = timestampUpdate;
     }
 
+    public List<Translation> getTranslations() {
+        return translations;
+    }
+
+    public void setTranslations(List<Translation> translations) {
+        this.translations = translations;
+    }
+
     @Override
     public String toString() {
         return "Word{" +
@@ -95,6 +111,7 @@ public class Word {
                 ", knownLevel=" + knownLevel +
                 ", timestampInsert=" + timestampInsert +
                 ", timestampUpdate=" + timestampUpdate +
+                ", translations=" + translations +
                 '}';
     }
 }
