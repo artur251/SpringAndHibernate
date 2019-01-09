@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+//import com.darkprograms.speech.translator.GoogleTranslate;
 
 @Controller
 @RequestMapping("/word")
@@ -78,6 +79,9 @@ public class WordTranslationController {
         ) {
             System.out.println("wordTranslationsAll="+wtt);
         }
+
+
+
 
 //        for (String item:sentenceWords
 //             ) {
