@@ -1,7 +1,11 @@
 package dudy.springdemo.controller;
 
 import dudy.springdemo.entity.Translation;
+import dudy.springdemo.entity.Word;
+import dudy.springdemo.entity.WordTranslation;
 import dudy.springdemo.service.TranslationService;
+import dudy.springdemo.service.WordService;
+import dudy.springdemo.service.WordTranslationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,23 +22,67 @@ import java.util.Scanner;
 @RequestMapping("/word")
 public class TranslationController {
     @Autowired
-    TranslationService service;
-    @GetMapping("/listOLD")
+    TranslationService translationService;
+    @Autowired
+    WordTranslationService wordTranslationService;
+    @Autowired
+    WordService wordService;
+
+
+
+    @GetMapping("/list")
     public String listWords(Model model){
-        List<Translation> translations = service.getTranslations();
+        List<Translation> translations = translationService.getTranslations();
 
         for (Translation t :translations
-             ) {
+        ) {
             System.out.println("test translations jest="+t);
         }
 
-        String sentence = "Andrew Strauss stepped down from his position as director of cricket with the England and Wales Cricket Board in October in order to spend more time with her as she fought the condition.";
+
+
+
+        String sentence = "Andrew Strauss book stepped down star from his position as room director of cricket with the England and Wales Cricket Board in October in order to spend more time with her as she fought the condition.";
         System.out.println("sentence="+sentence);
         Scanner scanner = new Scanner(sentence);
         ArrayList<String> sentenceWords = new ArrayList<>();
         while (scanner.hasNext()) {
             sentenceWords.add(scanner.next());
         }
+
+        List<WordTranslation> wordTranslationsAll =  new ArrayList<WordTranslation>();
+        List<WordTranslation> wordTranslations =  new ArrayList<WordTranslation>();
+        for (String wordi:sentenceWords
+        ) {
+            System.out.println("Dla getWordTranslations wordi="+wordi);
+            List<Word> wordArrayList= new ArrayList<Word>();
+            wordArrayList=wordService.getWord(wordi);
+
+            Word wordt = new Word();
+            List<Translation> translationsT = new ArrayList<Translation>();
+
+            if (!wordArrayList.isEmpty()) {
+                wordt=wordArrayList.get(0);
+                translationsT = wordArrayList.get(0).getTranslations();
+            }
+            else
+            {
+                wordt.setWord(wordi);
+                translationsT.add(new Translation("Google:..."));
+
+
+                //System.out.println(wordi+" -> " + GoogleTranslate.translate("pl", wordi));
+
+
+            }
+            wordTranslationsAll.add(new WordTranslation(wordt,translationsT));
+        }
+        for (WordTranslation wtt:wordTranslationsAll
+        ) {
+            System.out.println("wordTranslationsAll="+wtt);
+        }
+
+
 
 
 //        for (String item:sentenceWords
@@ -53,8 +101,23 @@ public class TranslationController {
         model.addAttribute("sentence", sentence);
         model.addAttribute("sentenceWords", sentenceWords);
         model.addAttribute("translations", translations);
+
+
+        model.addAttribute("wordTranslationsAll", wordTranslationsAll);
+
+
+
         return "list-words";
     }
+
+    @GetMapping("/showFormForUpdate")
+    public String formForUpdate(@RequestParam("wordId") int theId,
+                                Model model){
+        List<Translation> translations = translationService.getTranslationsForIdWord(theId);
+        model.addAttribute("translations", translations);
+        return "translations-form";
+    }
+
 /*
     @RequestMapping("/showFormForAdd")
     public String formForAdd(Model model){
@@ -72,13 +135,7 @@ public class TranslationController {
         translationService.addCustomer(theCustomer);
         return "redirect:/customer/list";
     }
-    @GetMapping("/showFormForUpdate")
-    public String formForUpdate(@RequestParam("customerId") int theId,
-                                Model model){
-        Customer customer = translationService.getCustomer(theId);
-        model.addAttribute("customer", customer);
-        return "customer-form";
-    }
+
 
     @PostMapping("/search")
     public String loadCustomerByName(@RequestParam("theSearchName")String theName, Model model){

@@ -24,10 +24,6 @@ public class Word {
     @Column(name = "timestamp_update")
     Date timestampUpdate;
 
-//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
-//    @JoinColumn(name = "id")
-//    private Translation translation;
-
     @OneToMany(mappedBy = "word", cascade = {CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
     private List<Translation> translations = new ArrayList<>();
 

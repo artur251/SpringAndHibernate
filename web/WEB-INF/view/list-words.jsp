@@ -35,67 +35,22 @@
             <h1>Zdanie do analizy:</h1>
             <h2>${sentence}</h2>
 
-
-            <%--<table>--%>
-                <%--<tr>--%>
-                    <%--<th>Słowa ze zdania</th>--%>
-                <%--</tr>--%>
-                <%--<c:forEach var="iter" items="${sentenceWords}">--%>
-                    <%--<tr>--%>
-                        <%--<td>${iter}</td>--%>
-                    <%--</tr>--%>
-                <%--</c:forEach>--%>
-            <%--</table>--%>
-
-
         </form:form>
-        <table>
-            <%--<tr>--%>
-                <%--<th>Language</th>--%>
-                <%--<th>Word</th>--%>
-                <%--<th>Translation</th>--%>
-                <%--<th>Sentence</th>--%>
-                <%--<th>Known Level</th>--%>
-                <%--<th>Source</th>--%>
-
-                <%--<th>Action</th>--%>
-
-            <%--</tr>--%>
-
-            <%--<c:forEach var="iter" items="${translations}">--%>
-
-            <%--&lt;%&ndash;<c:url var="updateLink" value="/customer/showFormForUpdate">&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<c:param name="customerId" value="${iter.id}"/>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;</c:url>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<c:url var="deleteLink" value="/customer/deleteCustomer">&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<c:param name="customerToDeleteId" value="${iter.id}"/>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;</c:url>&ndash;%&gt;--%>
-
-            <%--<tr>--%>
-            <%--<td>${iter.language}</td>--%>
-            <%--<td>${iter.word}</td>--%>
-            <%--<td>${iter.translation}</td>--%>
-            <%--<td>${iter.sentence}</td>--%>
-            <%--<td>${iter.knownLevel}</td>--%>
-            <%--<td>${iter.source}</td>--%>
-
-            <%--<td><a href="${updateLink}">update</a>--%>
-            <%--|--%>
-            <%--<a href="${deleteLink}"--%>
-            <%--onclick="if(!confirm('Are you sure u want to delete?'))return false">delete</a></td>--%>
-            <%--</tr>--%>
-            <%--</c:forEach>--%>
-        </table>
-
 
         <table>
             <tr>
                 <th>Słowo</th>
                 <th>Poziom poznania</th>
                 <th>Tłumaczenie</th>
+                <th>Akcja</th>
             </tr>
 
             <c:forEach var="iter" items="${wordTranslationsAll}">
+
+                <c:url var="updateLink" value="/word/showFormForUpdate">
+                    <c:param name="wordId" value="${iter.word.id}"/>
+                </c:url>
+
                 <tr>
                     <td>
                             ${iter.word.word}
@@ -116,6 +71,23 @@
                         </table>
 
                     </td>
+
+                    <td>
+                        <a href="${updateLink}">update</a>
+                    </td>
+
+                    <%--<c:url var="updateLink" value="/word/showFormForUpdate">--%>
+                        <%--<c:param name="wordId" value="${iter.word.id}"/>--%>
+                    <%--</c:url>--%>
+
+
+                    <%--<c:url var="deleteLink" value="/customer/deleteCustomer">--%>
+                        <%--<c:param name="customerToDeleteId" value="${iter.id}"/>--%>
+                    <%--</c:url>--%>
+
+
+
+
                 </tr>
             </c:forEach>
         </table>

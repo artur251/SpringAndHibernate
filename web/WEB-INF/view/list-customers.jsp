@@ -28,7 +28,6 @@
                onclick="window.location.href='/customer/showFormForAdd'; return false;"/>
         <form:form action="search" method="POST">
             Search customer: <input type="text" name="theSearchName" />
-
             <input type="submit" value="Search" class="add-button" />
 
 
@@ -68,7 +67,7 @@
                     <td><a href="${updateLink}">update</a>
                     |
                     <a href="${deleteLink}"
-                    onclick="if(!confirm('Are you sure u want to delete?'))return false">delete</a></td>
+                    onclick="if(!confirm('Are you sure to delete?'))return false">delete</a></td>
                 </tr>
             </c:forEach>
         </table>
