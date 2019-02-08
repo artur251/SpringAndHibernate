@@ -30,7 +30,7 @@ public class CustomerDaoImpl implements CustomerDao {
         Session session = sessionFactory.getCurrentSession();
 
         session.saveOrUpdate(customer);
-        for (int i = 0; i < 11; i++)
+        for (int i = 0; i < 1001; i++)
         {
             Customer cust = new Customer();
             cust.setName(customer.getName()+"_"+i);
