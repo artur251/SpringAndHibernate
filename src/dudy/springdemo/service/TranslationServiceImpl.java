@@ -22,17 +22,28 @@ public class TranslationServiceImpl implements TranslationService {
         return translationDao.getTranslations();
     }
 
+//    @Override
+//    @Transactional
+//    public List<Translation> getTranslationsForIdWord(int id) {
+//        return translationDao.getTranslationsForIdWord(id);
+//    }
+
     @Override
     @Transactional
-    public List<Translation> getTranslationsForIdWord(int id) {
-        return translationDao.getTranslationsForIdWord(id);
+    public Translation getTranslationForIdTranslation(int id) {
+        return translationDao.getTranslationForIdTranslation(id);
     }
-/*
+
+
     @Override
     @Transactional
-    public void addCustomer(Customer theCustomer) {
-        customerDao.addCustomer(theCustomer);
+    public void addTranslation(Translation theTranslation) {
+        translationDao.addTranslation(theTranslation);
     }
+
+
+
+    /*
 
     @Override
     @Transactional

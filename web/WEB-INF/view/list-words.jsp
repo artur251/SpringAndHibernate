@@ -46,11 +46,6 @@
             </tr>
 
             <c:forEach var="iter" items="${wordTranslationsAll}">
-
-                <c:url var="updateLink" value="/word/showFormForUpdate">
-                    <c:param name="wordId" value="${iter.word.id}"/>
-                </c:url>
-
                 <tr>
                     <td>
                             ${iter.word.word}
@@ -65,16 +60,24 @@
                             <tr>
                                 <td>
                                     ${ttt.translation}
+
+                                    <%--if     --%>
+                                    <c:url var="updateLink" value="/word/showFormForUpdate">
+                                        <c:param name="id" value="${ttt.id}"/>
+                                    </c:url>
+
                                 </td>
+
+                                <td>
+                                    <a href="${updateLink}">update</a>
+                                </td>
+
                             </tr>
                         </c:forEach>
                         </table>
 
                     </td>
 
-                    <td>
-                        <a href="${updateLink}">update</a>
-                    </td>
 
                     <%--<c:url var="updateLink" value="/word/showFormForUpdate">--%>
                         <%--<c:param name="wordId" value="${iter.word.id}"/>--%>

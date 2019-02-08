@@ -68,12 +68,9 @@ public class TranslationController {
             else
             {
                 wordt.setWord(wordi);
-                translationsT.add(new Translation("Google:..."));
-
-
+                //translationsT.add(new Translation(" szukaj w Google"));
+                translationsT=null;
                 //System.out.println(wordi+" -> " + GoogleTranslate.translate("pl", wordi));
-
-
             }
             wordTranslationsAll.add(new WordTranslation(wordt,translationsT));
         }
@@ -83,39 +80,26 @@ public class TranslationController {
         }
 
 
-
-
-//        for (String item:sentenceWords
-//             ) {
-//            System.out.println("Dla sentenceWords="+item);
-//            List<Translation> wordsInTable = translationService.getTranslationsForIdWord(item);
-//            for (Translation www:wordsInTable
-//                 ) {
-//                System.out.println(" w tabeli jest="+www);
-//            }
-//            //System.out.println(item+" -> " + GoogleTranslate.translate("pl", item));
-//        }
-
-
-
         model.addAttribute("sentence", sentence);
         model.addAttribute("sentenceWords", sentenceWords);
         model.addAttribute("translations", translations);
-
-
         model.addAttribute("wordTranslationsAll", wordTranslationsAll);
-
-
 
         return "list-words";
     }
 
     @GetMapping("/showFormForUpdate")
-    public String formForUpdate(@RequestParam("wordId") int theId,
+    public String formForUpdate(@RequestParam("id") int id,
                                 Model model){
-        List<Translation> translations = translationService.getTranslationsForIdWord(theId);
-        model.addAttribute("translations", translations);
-        return "translations-form";
+        Translation translation = translationService.getTranslationForIdTranslation(id);
+        model.addAttribute("translation", translation);
+        return "translation-form";
+    }
+
+    @PostMapping("/saveTranslation")
+    public String processForm(@ModelAttribute("translation")Translation theTranslation){
+        translationService.addTranslation(theTranslation);
+        return "redirect:/word/list";
     }
 
 /*
@@ -130,11 +114,7 @@ public class TranslationController {
         translationService.deleteCustomer(theId);
         return "redirect:/customer/list";
     }
-    @PostMapping("/saveCustomer")
-    public String processForm(@ModelAttribute("customer")Customer theCustomer){
-        translationService.addCustomer(theCustomer);
-        return "redirect:/customer/list";
-    }
+
 
 
     @PostMapping("/search")

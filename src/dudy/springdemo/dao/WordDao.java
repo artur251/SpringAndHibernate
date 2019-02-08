@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface WordDao {
     List<Word> getWords();
-    List<Word> getWord(String item);
+    List<Word> getWord(String word);
 /*
     void addCustomer(Customer customer);
     Customer getCustomer(int theId);

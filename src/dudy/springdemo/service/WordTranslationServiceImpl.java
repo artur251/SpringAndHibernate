@@ -23,19 +23,12 @@ public class WordTranslationServiceImpl implements WordTranslationService {
 
     @Override
     public ArrayList<WordTranslation> getWordTranslations(Word word) {
-
         ArrayList<WordTranslation> result = null; // = new List<WordTranslation>();
-
         //wyszukanie słowa
         List<Word> words = wordDao.getWord(word.getWord());
-
-
         for (Word item : words
              ) {
-            //wyszukanie jego tłumaczeń
-            List<Translation> translations = translationDao.getTranslationsForIdWord(item.getId());
-            //utworzenie instancji
-            WordTranslation wordTranslation = new WordTranslation(item, translations);
+            WordTranslation wordTranslation = new WordTranslation(item, item.getTranslations());
             //dodanie do listy wynikowej
             result.add(wordTranslation);
         }
@@ -44,61 +37,18 @@ public class WordTranslationServiceImpl implements WordTranslationService {
 
     @Override
     public ArrayList<WordTranslation> getWordTranslations(String word) {
-        System.out.println("Jestem w getWordTranslations(String word):");
-
-        //List<WordTranslation> result = new ArrayList<WordTranslation>();
-        ArrayList<WordTranslation> result = null; ///new ArrayList<WordTranslation>();
-
+        //jak w funkcji jw.
+        ArrayList<WordTranslation> result = null; // = new List<WordTranslation>();
         //wyszukanie słowa
-        System.out.println("Jestem w getWordTranslations(String word): przed wordDao.getTranslationsForIdWord dla word="+word);
         List<Word> words = wordDao.getWord(word);
-        System.out.println("Jestem w getWordTranslations(String word): po wordDao.getTranslationsForIdWord words.size()="+words.size());
-
-        if (!words.isEmpty())
-        {
-//            for (Word item : words
-//            ) {
-//                //wyszukanie jego tłumaczeń
-//                List<Translation> translations = translationDao.getTranslationsForIdWord(item.getId());
-//                System.out.println("Jestem w getWordTranslations(String word): po translationDao.getTranslationsForIdWord translations.size()="+translations.size());
-//                //utworzenie instancji
-//                //WordTranslation wordTranslation = new WordTranslation(item, translations);
-//                //dodanie do listy wynikowej
-//
-//                if (!translations.isEmpty()) {
-//                    System.out.println("Jestem w getWordTranslations(String word): item="+item);
-//                    System.out.println("Jestem w getWordTranslations(String word): translations="+translations);
-//
-//
-//                    result.add(new WordTranslation(item, translations));
-//                }
-//            }
-
-
-                List<Translation> translations = translationDao.getTranslationsForIdWord(words.get(0).getId());
-                System.out.println("Jestem w getWordTranslations(String word): po translationDao.getTranslationsForIdWord translations.size()="+translations.size());
-                //utworzenie instancji
-                //WordTranslation wordTranslation = new WordTranslation(item, translations);
-                //dodanie do listy wynikowej
-
-                if (!translations.isEmpty()) {
-                    System.out.println("Jestem w getWordTranslations(String word): words.get(0)="+words.get(0));
-                    System.out.println("Jestem w getWordTranslations(String word): translations="+translations);
-                    System.out.println("Jestem w getWordTranslations(String word): translations.size()="+translations.size());
-
-
-                    result.add(new WordTranslation(words.get(0), translations));
-                }
-
-
-
-
-    }
+        for (Word item : words
+        ) {
+            WordTranslation wordTranslation = new WordTranslation(item, item.getTranslations());
+            //dodanie do listy wynikowej
+            result.add(wordTranslation);
+        }
         return result;
     }
-
-
-
 
 
     /*

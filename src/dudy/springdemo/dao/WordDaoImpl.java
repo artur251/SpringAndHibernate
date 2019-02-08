@@ -34,8 +34,7 @@ public class WordDaoImpl implements WordDao {
     }
 
     @Override
-    public List<Word> getWord(String wordx) {
-        //Session session = sessionFactory.getCurrentSession();
+    public List<Word> getWord(String word) {
         Session session;
         try {
             session = sessionFactory.getCurrentSession();
@@ -43,9 +42,8 @@ public class WordDaoImpl implements WordDao {
             session = sessionFactory.openSession();
         }
 
-
-        Query<Word> query = session.createQuery("from Word where word=:wordx order by timestampUpdate", Word.class);
-        query.setString("wordx", wordx);
+        Query<Word> query = session.createQuery("from Word where word=:word order by timestampUpdate", Word.class);
+        query.setString("word", word);
         List<Word> words = query.getResultList();
         return words;
     }

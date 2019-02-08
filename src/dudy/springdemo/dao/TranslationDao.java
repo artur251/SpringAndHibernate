@@ -10,9 +10,10 @@ import java.util.List;
  */
 public interface TranslationDao {
     List<Translation> getTranslations();
-    List<Translation> getTranslationsForIdWord(int idWordx);
+//    List<Translation> getTranslationsForIdWord(int idWordx);
+    Translation getTranslationForIdTranslation (int idTranslation);
+    void addTranslation(Translation theTranslation);
 /*
-    void addCustomer(Customer customer);
     Customer getCustomer(int theId);
     void deleteCustomer(int theId);
     List<Customer> getCustomer(String theName);

@@ -9,9 +9,10 @@ import java.util.List;
  */
 public interface TranslationService {
     public List<Translation> getTranslations();
-    public List<Translation> getTranslationsForIdWord(int id);
+//    public List<Translation> getTranslationsForIdWord(int id);
+    public Translation getTranslationForIdTranslation(int id);
+    void addTranslation(Translation theTranslation);
 /*
-    void addCustomer(Customer theCustomer);
     Customer getCustomer(int theId);
     void deleteCustomer(int theId);
     List<Customer> getCustomer(String theName);

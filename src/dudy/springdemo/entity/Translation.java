@@ -1,6 +1,7 @@
 package dudy.springdemo.entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -17,20 +18,21 @@ public class Translation {
     String language;
     @Column(name = "id_source")
     int idSource;
-//    @Column(name = "id_word")
-//    int idWord;
+    @Column(name = "id_word")
+    int idWord;
     @Column(name = "sentence")
     String sentence;
     @Column(name = "translation")
     String translation;
     @Column(name = "timestamp_insert")
-    Date timestampInsert;
+    Timestamp timestampInsert;
     @Column(name = "timestamp_update")
-    Date timestampUpdate;
+    Timestamp timestampUpdate;
 
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
-    @JoinColumn(name = "id_word")
+    //@JoinColumn(name="productId",referencedColumnName="id_product", insertable=false, updatable=false)
+    @JoinColumn(name = "id_word", insertable=false, updatable=false)
     private Word word;
 
     public Translation() {
@@ -40,7 +42,7 @@ public class Translation {
         this.translation = translation;
     }
 
-    public Translation(String language, int idSource, String sentence, String translation, Date timestampInsert, Date timestampUpdate) {
+    public Translation(String language, int idSource, String sentence, String translation, Timestamp timestampInsert, Timestamp timestampUpdate) {
         this.language = language;
         this.idSource = idSource;
         this.sentence = sentence;
@@ -93,16 +95,32 @@ public class Translation {
         return timestampInsert;
     }
 
-    public void setTimestampInsert(Date timestampInsert) {
+    public void setTimestampInsert(Timestamp timestampInsert) {
         this.timestampInsert = timestampInsert;
     }
 
-    public Date getTimestampUpdate() {
+    public Timestamp getTimestampUpdate() {
         return timestampUpdate;
     }
 
-    public void setTimestampUpdate(Date timestampUpdate) {
+    public void setTimestampUpdate(Timestamp timestampUpdate) {
         this.timestampUpdate = timestampUpdate;
+    }
+
+    public int getIdWord() {
+        return idWord;
+    }
+
+    public void setIdWord(int idWord) {
+        this.idWord = idWord;
+    }
+
+    public Word getWord() {
+        return word;
+    }
+
+    public void setWord(Word word) {
+        this.word = word;
     }
 
     @Override

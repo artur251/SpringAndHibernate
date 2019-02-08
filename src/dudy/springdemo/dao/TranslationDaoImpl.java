@@ -7,8 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,9 +31,26 @@ public class TranslationDaoImpl implements TranslationDao {
         return translations;
     }
 
+//    @Override
+//    public List<Translation> getTranslationsForIdWord(int idWordx) {
+//        //Session session = sessionFactory.getCurrentSession();
+//        Session session;
+//        try {
+//            session = sessionFactory.getCurrentSession();
+//        } catch (HibernateException e) {
+//            session = sessionFactory.openSession();
+//        }
+//
+//
+//        Query<Translation> query = session.createQuery("from Translation where idWord=:idWordx order by timestampUpdate", Translation.class);
+//        query.setInteger("idWordx", idWordx);
+//        List<Translation> translations = query.getResultList();
+//        return translations;
+//    }
+
     @Override
-    public List<Translation> getTranslationsForIdWord(int idWordx) {
-        //Session session = sessionFactory.getCurrentSession();
+    public Translation getTranslationForIdTranslation (int idTranslation)
+    {
         Session session;
         try {
             session = sessionFactory.getCurrentSession();
@@ -43,32 +58,21 @@ public class TranslationDaoImpl implements TranslationDao {
             session = sessionFactory.openSession();
         }
 
-
-        Query<Translation> query = session.createQuery("from Translation where idWord=:idWordx order by timestampUpdate", Translation.class);
-        query.setInteger("idWordx", idWordx);
-//        query= session.createQuery("FROM Customer c where c.name LIKE CONCAT('%', :theName, '%')");
-        List<Translation> translations = query.getResultList();
-        return translations;
+        Query<Translation> query = session.createQuery("from Translation where id=:idTranslation", Translation.class);
+        query.setInteger("idTranslation", idTranslation);
+        Translation translation = query.getResultList().get(0);
+        System.out.println("getTranslationForIdTranslation ++++++++++++++++++ theTranslation="+translation);
+        return translation;
     }
 
-
-
-    /*
     @Override
-    public void addCustomer(Customer customer) {
+    public void addTranslation(Translation theTranslation) {
         Session session = sessionFactory.getCurrentSession();
+        System.out.println("addTranslation ++++++++++++++++++ theTranslation="+theTranslation);
+        session.saveOrUpdate(theTranslation);
 
-        session.saveOrUpdate(customer);
-        for (int i = 0; i < 11; i++)
-        {
-            Customer cust = new Customer();
-            cust.setName(customer.getName()+"_"+i);
-            cust.setLastName(customer.getLastName()+"_"+i);
-            cust.setEmail(customer.getEmail()+"_"+i);
-            session.saveOrUpdate(cust);
-        }
     }
-
+/*
     @Override
     public Customer getCustomer(int theId) {
         Session session = sessionFactory.getCurrentSession();
