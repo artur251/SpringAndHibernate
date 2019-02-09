@@ -19,6 +19,7 @@ import java.util.Scanner;
  * Created by admin on 11.11.2018.
  */
 @Controller
+//@ControllerAdvice
 @RequestMapping("/word")
 public class TranslationController {
     @Autowired
@@ -92,23 +93,43 @@ public class TranslationController {
     public String formForUpdate(@RequestParam("id") int id,
                                 Model model){
         Translation translation = translationService.getTranslationForIdTranslation(id);
+        System.out.println("+++ w showFormForUpdate +++ translation="+translation);
         model.addAttribute("translation", translation);
         return "translation-form";
     }
 
-    @PostMapping("/saveTranslation")
-    public String processForm(@ModelAttribute("translation")Translation theTranslation){
+    @PostMapping("/saveTranslationX")
+    public String processForm(@ModelAttribute("translation") Translation theTranslation){
+        System.out.println("+++ w saveTranslationX +++ theTranslation="+theTranslation);
         translationService.addTranslation(theTranslation);
         return "redirect:/word/list";
     }
 
-/*
     @RequestMapping("/showFormForAdd")
     public String formForAdd(Model model){
-        Customer theCustomer = new Customer();
-        model.addAttribute("customer", theCustomer);
-        return "customer-form";
+
+
+        Translation theTranslation = new Translation();
+        theTranslation.setIdWord(1);
+        theTranslation.setTranslation("xxx");
+        theTranslation.setWord(new Word("xxx"));
+
+        //Translation theTranslation = translationService.getTranslationForIdTranslation(1);
+        //theTranslation.setTranslation("test");
+
+        System.out.println("++++ w showFormForAdd theTranslation ++++ ="+theTranslation);
+        model.addAttribute("translationY", theTranslation);
+        return "translation-form-add";
     }
+
+    @PostMapping("/saveTranslationY")
+    public String processFormY(@ModelAttribute("translationY") Translation theTranslation){
+        System.out.println("+++ w saveTranslationY +++ theTranslation="+theTranslation);
+        translationService.addTranslation(theTranslation);
+        return "redirect:/word/list";
+    }
+
+    /*
     @GetMapping("/deleteCustomer")
     public String deleteCustomer(@RequestParam("customerToDeleteId")int theId){
         translationService.deleteCustomer(theId);

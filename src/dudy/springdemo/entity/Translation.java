@@ -129,10 +129,12 @@ public class Translation {
                 "id=" + id +
                 ", language='" + language + '\'' +
                 ", idSource=" + idSource +
+                ", idWord=" + idWord +
                 ", sentence='" + sentence + '\'' +
                 ", translation='" + translation + '\'' +
                 ", timestampInsert=" + timestampInsert +
                 ", timestampUpdate=" + timestampUpdate +
+                //", word=" + word +
                 '}';
     }
 }

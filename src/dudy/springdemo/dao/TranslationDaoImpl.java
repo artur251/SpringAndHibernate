@@ -68,9 +68,8 @@ public class TranslationDaoImpl implements TranslationDao {
     @Override
     public void addTranslation(Translation theTranslation) {
         Session session = sessionFactory.getCurrentSession();
-        System.out.println("addTranslation ++++++++++++++++++ theTranslation="+theTranslation);
-        session.saveOrUpdate(theTranslation);
-
+        System.out.println("+++ w addTranslation +++ theTranslation="+theTranslation);
+            session.saveOrUpdate(theTranslation);
     }
 /*
     @Override
