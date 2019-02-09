@@ -29,12 +29,12 @@ public class Translation {
     @Column(name = "timestamp_update")
     Timestamp timestampUpdate;
 
-
+/*
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
     //@JoinColumn(name="productId",referencedColumnName="id_product", insertable=false, updatable=false)
     @JoinColumn(name = "id_word", insertable=false, updatable=false)
     private Word word;
-
+*/
     public Translation() {
     }
 
@@ -114,7 +114,7 @@ public class Translation {
     public void setIdWord(int idWord) {
         this.idWord = idWord;
     }
-
+/*
     public Word getWord() {
         return word;
     }
@@ -122,17 +122,19 @@ public class Translation {
     public void setWord(Word word) {
         this.word = word;
     }
-
+*/
     @Override
     public String toString() {
         return "Translation{" +
                 "id=" + id +
                 ", language='" + language + '\'' +
                 ", idSource=" + idSource +
+                ", idWord=" + idWord +
                 ", sentence='" + sentence + '\'' +
                 ", translation='" + translation + '\'' +
                 ", timestampInsert=" + timestampInsert +
                 ", timestampUpdate=" + timestampUpdate +
+                //", word=" + word +
                 '}';
     }
 }

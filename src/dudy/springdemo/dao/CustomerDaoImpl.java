@@ -28,6 +28,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public void addCustomer(Customer customer) {
         Session session = sessionFactory.getCurrentSession();
+        System.out.println("+++ w addCustomer +++ customer="+customer);
         session.saveOrUpdate(customer);
 //        for (int i = 0; i < 101; i++)
 //        {

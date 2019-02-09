@@ -2,10 +2,9 @@ package dudy.springdemo.controller;
 
 import dudy.springdemo.entity.Translation;
 import dudy.springdemo.entity.Word;
-import dudy.springdemo.entity.WordTranslation;
 import dudy.springdemo.service.TranslationService;
 import dudy.springdemo.service.WordService;
-import dudy.springdemo.service.WordTranslationService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,16 +18,13 @@ import java.util.Scanner;
  * Created by admin on 11.11.2018.
  */
 @Controller
+//@ControllerAdvice
 @RequestMapping("/word")
 public class TranslationController {
     @Autowired
     TranslationService translationService;
     @Autowired
-    WordTranslationService wordTranslationService;
-    @Autowired
     WordService wordService;
-
-
 
     @GetMapping("/list")
     public String listWords(Model model){
@@ -39,9 +35,6 @@ public class TranslationController {
             System.out.println("test translations jest="+t);
         }
 
-
-
-
         String sentence = "Andrew Strauss book stepped down star from his position as room director of cricket with the England and Wales Cricket Board in October in order to spend more time with her as she fought the condition.";
         System.out.println("sentence="+sentence);
         Scanner scanner = new Scanner(sentence);
@@ -50,8 +43,11 @@ public class TranslationController {
             sentenceWords.add(scanner.next());
         }
 
-        List<WordTranslation> wordTranslationsAll =  new ArrayList<WordTranslation>();
-        List<WordTranslation> wordTranslations =  new ArrayList<WordTranslation>();
+        //xxList<WordTranslation> wordTranslationsAll =  new ArrayList<WordTranslation>();
+        //xxList<WordTranslation> wordTranslations =  new ArrayList<WordTranslation>();
+        List<Word> wordTranslationsAll =  new ArrayList<Word>();
+
+
         for (String wordi:sentenceWords
         ) {
             System.out.println("Dla getWordTranslations wordi="+wordi);
@@ -63,7 +59,8 @@ public class TranslationController {
 
             if (!wordArrayList.isEmpty()) {
                 wordt=wordArrayList.get(0);
-                translationsT = wordArrayList.get(0).getTranslations();
+                //xxtranslationsT = wordArrayList.get(0).getTranslations();
+                wordt.setTranslations(wordt.getTranslations());
             }
             else
             {
@@ -72,9 +69,14 @@ public class TranslationController {
                 translationsT=null;
                 //System.out.println(wordi+" -> " + GoogleTranslate.translate("pl", wordi));
             }
-            wordTranslationsAll.add(new WordTranslation(wordt,translationsT));
+
+            //xxwordTranslationsAll.add(new WordTranslation(wordt,translationsT));
+            wordTranslationsAll.add(wordt);
+
+
+
         }
-        for (WordTranslation wtt:wordTranslationsAll
+        for (Word wtt:wordTranslationsAll
         ) {
             System.out.println("wordTranslationsAll="+wtt);
         }
@@ -92,23 +94,39 @@ public class TranslationController {
     public String formForUpdate(@RequestParam("id") int id,
                                 Model model){
         Translation translation = translationService.getTranslationForIdTranslation(id);
+        System.out.println("+++ w showFormForUpdate +++ translation="+translation);
         model.addAttribute("translation", translation);
         return "translation-form";
     }
 
     @PostMapping("/saveTranslation")
-    public String processForm(@ModelAttribute("translation")Translation theTranslation){
+    public String processForm(@ModelAttribute("translation") Translation theTranslation){
+        System.out.println("+++ w saveTranslation +++ theTranslation="+theTranslation);
         translationService.addTranslation(theTranslation);
         return "redirect:/word/list";
     }
 
-/*
     @RequestMapping("/showFormForAdd")
-    public String formForAdd(Model model){
-        Customer theCustomer = new Customer();
-        model.addAttribute("customer", theCustomer);
-        return "customer-form";
+    public String formForAdd(@RequestParam("idWord") int idWord, @RequestParam("sentence") String sentence, Model model){
+        System.out.println("++++ w showFormForAdd theTranslation ++++ idWord="+idWord);
+        Translation theTranslation = new Translation();
+        theTranslation.setIdWord(idWord);
+        theTranslation.setSentence(sentence);
+
+
+        //TODO
+        theTranslation.setLanguage("eng");
+        theTranslation.setIdSource(1);
+
+
+        System.out.println("++++ w showFormForAdd theTranslation ++++ ="+theTranslation);
+        model.addAttribute("translation", theTranslation);
+        return "translation-form";
     }
+
+
+
+    /*
     @GetMapping("/deleteCustomer")
     public String deleteCustomer(@RequestParam("customerToDeleteId")int theId){
         translationService.deleteCustomer(theId);

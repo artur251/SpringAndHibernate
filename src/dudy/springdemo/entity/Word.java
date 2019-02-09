@@ -24,8 +24,15 @@ public class Word {
     @Column(name = "timestamp_update")
     Date timestampUpdate;
 
-    @OneToMany(mappedBy = "word", cascade = {CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
+
+    //@OneToMany(mappedBy = "word", fetch=FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
+    //private List<Translation> translations = new ArrayList<>();
+
+    //TEST
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
+    @JoinColumn(name = "id_word", insertable=false, updatable=false)
     private List<Translation> translations = new ArrayList<>();
+
 
     public Word() {
     }
@@ -42,6 +49,14 @@ public class Word {
         this.timestampUpdate = timestampUpdate;
     }
 
+    public Word(String word, String language, int knownLevel, Date timestampInsert, Date timestampUpdate,List<Translation> translations) {
+        this.word = word;
+        this.language = language;
+        this.knownLevel = knownLevel;
+        this.timestampInsert = timestampInsert;
+        this.timestampUpdate = timestampUpdate;
+        this.translations = translations;
+    }
     public int getId() {
         return id;
     }

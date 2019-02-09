@@ -1,12 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: admin
-  Date: 11.11.2018
-  Time: 18:30
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -48,20 +41,19 @@
             <c:forEach var="iter" items="${wordTranslationsAll}">
                 <tr>
                     <td>
-                            ${iter.word.word}
+                            ${iter.word}
                     </td>
                     <td>
-                            ${iter.word.knownLevel}
+                            ${iter.knownLevel}
                     </td>
                     <td>
 
                         <table>
-                        <c:forEach var="ttt" items="${iter.translation}">
+                        <c:forEach var="ttt" items="${iter.translations}">
                             <tr>
                                 <td>
                                     ${ttt.translation}
 
-                                    <%--if     --%>
                                     <c:url var="updateLink" value="/word/showFormForUpdate">
                                         <c:param name="id" value="${ttt.id}"/>
                                     </c:url>
@@ -74,20 +66,19 @@
 
                             </tr>
                         </c:forEach>
+
+
                         </table>
 
+                        <td>
+                            <c:url var="insertLink" value="/word/showFormForAdd">
+                                <c:param name="idWord" value="${iter.id}"/>
+                                <c:param name="sentence" value="${sentence}"/>
+                            </c:url>
+                            <a href="${insertLink}">insert</a>
+                        </td>
+
                     </td>
-
-
-                    <%--<c:url var="updateLink" value="/word/showFormForUpdate">--%>
-                        <%--<c:param name="wordId" value="${iter.word.id}"/>--%>
-                    <%--</c:url>--%>
-
-
-                    <%--<c:url var="deleteLink" value="/customer/deleteCustomer">--%>
-                        <%--<c:param name="customerToDeleteId" value="${iter.id}"/>--%>
-                    <%--</c:url>--%>
-
 
 
 
