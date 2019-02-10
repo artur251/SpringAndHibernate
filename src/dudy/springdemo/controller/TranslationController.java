@@ -66,7 +66,7 @@ public class TranslationController {
             }
             else
             {
-                wordt.setWord(wordi);
+                wordt.setWordText(wordi);
                 //translationsT.add(new Translation(" szukaj w Google"));
                 //translationsT=null;
                 //System.out.println(wordi+" -> " + GoogleTranslate.translate("pl", wordi));
@@ -115,7 +115,7 @@ public class TranslationController {
 //        else //trzeba dodać word
 //        {
 //            Word theWord = new Word();
-//            theWord.setWord("Strauss");
+//            theWord.setWordText("Strauss");
 //            theWord.setLanguage("eng");
 //            System.out.println("+++ w saveTranslation +++ pierwsze trzeba dodać word theWord="+theWord);
 //            wordService.addWord(theWord);
@@ -130,7 +130,7 @@ public class TranslationController {
     @RequestMapping("/showFormForAddTranslation")
     public String formForAddTranslation(@RequestParam("idWord") int idWord, @RequestParam("theSentence") String theSentence, Model model){
 //      public String formForAdd(@RequestParam("theWord") Word theWord, @RequestParam("theSentence") String theSentence, Model model){
-        System.out.println("++++ w showFormForAdd theTranslation ++++ idWord="+idWord);
+        System.out.println("++++ w showFormForAdd ++++ idWord="+idWord);
         Translation theTranslation = new Translation();
         theTranslation.setIdWord(idWord);
         theTranslation.setSentence(theSentence);
@@ -149,8 +149,8 @@ public class TranslationController {
 
     @RequestMapping("/showFormForAddWord")
     //public String formForAddWord(@RequestParam("idWord") int idWord, @RequestParam("theSentence") String theSentence, Model model){
-    public String formForAdd(@RequestParam("theWord") Word theWord, Model model){
-        System.out.println("++++ w showFormForAdd theTranslation ++++ theWord="+theWord);
+    public String formForAddWord(@RequestParam("theWord") Word theWord, Model model){
+        System.out.println("++++ w formForAddWord ++++ theWord="+theWord);
         //Translation theTranslation = new Translation();
         //theTranslation.setIdWord(idWord);
         //theTranslation.setSentence(theSentence);
@@ -166,6 +166,33 @@ public class TranslationController {
         return "word-form";
     }
 
+    @PostMapping("/saveWord")
+    public String processForm(@ModelAttribute("word") Word theWord){
+        //public String processForm(@ModelAttribute("word") Word theWord, @ModelAttribute("translation") Translation theTranslation){
+        System.out.println("+++ w saveWord +++ theWord="+theWord);
+        //TODO
+        theWord.setLanguage("eng");
+
+
+
+//        if (theTranslation.getIdWord()!=0)
+//        {
+//            System.out.println("+++ w saveTranslation +++ kolejne tłumaczenie do word theTranslation.getIdWord()="+theTranslation.getIdWord());
+//        }
+//        else //trzeba dodać word
+//        {
+//            Word theWord = new Word();
+//            theWord.setWordText("Strauss");
+//            theWord.setLanguage("eng");
+//            System.out.println("+++ w saveTranslation +++ pierwsze trzeba dodać word theWord="+theWord);
+//            wordService.addWord(theWord);
+//            System.out.println("+++ w saveTranslation +++ pierwsze trzeba dodać word theWord, pododaniu theWord.getId()="+theWord.getId());
+//            theTranslation.setIdWord(theWord.getId());
+//        }
+
+        wordService.addWord(theWord);
+        return "redirect:/word/list";
+    }
 
     /*
     @GetMapping("/deleteCustomer")

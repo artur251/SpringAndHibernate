@@ -115,11 +115,11 @@ public class Translation {
         this.idWord = idWord;
     }
 /*
-    public Word getWord() {
+    public Word getWordText() {
         return word;
     }
 
-    public void setWord(Word word) {
+    public void setWordText(Word word) {
         this.word = word;
     }
 */

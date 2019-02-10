@@ -14,7 +14,7 @@ public class Word {
     @Column(name = "id")
     int id;
     @Column(name = "word")
-    String word;
+    String wordText;
     @Column(name = "language")
     String language;
     @Column(name = "known_level")
@@ -36,20 +36,20 @@ public class Word {
     public Word() {
     }
 
-    public Word(String word) {
-        this.word = word;
+    public Word(String wordText) {
+        this.wordText = wordText;
     }
 
-    public Word(String word, String language, int knownLevel, Date timestampInsert, Date timestampUpdate) {
-        this.word = word;
+    public Word(String wordText, String language, int knownLevel, Date timestampInsert, Date timestampUpdate) {
+        this.wordText = wordText;
         this.language = language;
         this.knownLevel = knownLevel;
         this.timestampInsert = timestampInsert;
         this.timestampUpdate = timestampUpdate;
     }
 
-    public Word(String word, String language, int knownLevel, Date timestampInsert, Date timestampUpdate,List<Translation> translations) {
-        this.word = word;
+    public Word(String wordText, String language, int knownLevel, Date timestampInsert, Date timestampUpdate, List<Translation> translations) {
+        this.wordText = wordText;
         this.language = language;
         this.knownLevel = knownLevel;
         this.timestampInsert = timestampInsert;
@@ -64,12 +64,12 @@ public class Word {
         this.id = id;
     }
 
-    public String getWord() {
-        return word;
+    public String getWordText() {
+        return wordText;
     }
 
-    public void setWord(String word) {
-        this.word = word;
+    public void setWordText(String word) {
+        this.wordText = word;
     }
 
     public String getLanguage() {
@@ -116,7 +116,7 @@ public class Word {
     public String toString() {
         return "Word{" +
                 "id=" + id +
-                ", word='" + word + '\'' +
+                ", word='" + wordText + '\'' +
                 ", language='" + language + '\'' +
                 ", knownLevel=" + knownLevel +
                 ", timestampInsert=" + timestampInsert +

@@ -42,7 +42,7 @@ public class WordDaoImpl implements WordDao {
             session = sessionFactory.openSession();
         }
 
-        Query<Word> query = session.createQuery("from Word where word=:word order by timestampUpdate", Word.class);
+        Query<Word> query = session.createQuery("from Word where wordText=:word order by timestampUpdate", Word.class);
         query.setString("word", word);
         List<Word> words = query.getResultList();
         return words;

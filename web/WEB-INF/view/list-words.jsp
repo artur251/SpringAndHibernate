@@ -41,13 +41,13 @@
             <c:forEach var="theWord" items="${wordTranslationsAll}">
                 <tr>
                     <td>
-                            ${theWord.word}
+                            ${theWord.wordText}
                     </td>
                     <td>
                             ${theWord.knownLevel}
 
                                 <c:url var="insertWordLink" value="/word/showFormForAddWord">
-                                    <c:param name="theWord" value="${theWord}"/>
+                                    <c:param name="theWord" value="${theWord.wordText}"/>
                                 </c:url>
                                 <a href="${insertWordLink}">insert</a>
 
