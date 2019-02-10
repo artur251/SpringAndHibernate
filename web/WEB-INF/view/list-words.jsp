@@ -38,18 +38,25 @@
                 <th>Akcja</th>
             </tr>
 
-            <c:forEach var="iter" items="${wordTranslationsAll}">
+            <c:forEach var="theWord" items="${wordTranslationsAll}">
                 <tr>
                     <td>
-                            ${iter.word}
+                            ${theWord.word}
                     </td>
                     <td>
-                            ${iter.knownLevel}
+                            ${theWord.knownLevel}
+
+                                <c:url var="insertWordLink" value="/word/showFormForAddWord">
+                                    <c:param name="theWord" value="${theWord}"/>
+                                </c:url>
+                                <a href="${insertWordLink}">insert</a>
+
+
                     </td>
                     <td>
 
                         <table>
-                        <c:forEach var="ttt" items="${iter.translations}">
+                        <c:forEach var="ttt" items="${theWord.translations}">
                             <tr>
                                 <td>
                                     ${ttt.translation}
@@ -71,11 +78,11 @@
                         </table>
 
                         <td>
-                            <c:url var="insertLink" value="/word/showFormForAdd">
-                                <c:param name="idWord" value="${iter.id}"/>
-                                <c:param name="sentence" value="${sentence}"/>
+                            <c:url var="insertTranslationLink" value="/word/showFormForAddTranslation">
+                                <c:param name="idWord" value="${theWord.id}"/>
+                                <c:param name="theSentence" value="${sentence}"/>
                             </c:url>
-                            <a href="${insertLink}">insert</a>
+                            <a href="${insertTranslationLink}">insert</a>
                         </td>
 
                     </td>

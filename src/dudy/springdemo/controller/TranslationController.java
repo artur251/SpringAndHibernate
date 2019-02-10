@@ -55,18 +55,20 @@ public class TranslationController {
             wordArrayList=wordService.getWord(wordi);
 
             Word wordt = new Word();
-            List<Translation> translationsT = new ArrayList<Translation>();
+            //List<Translation> translationsT = new ArrayList<Translation>();
 
             if (!wordArrayList.isEmpty()) {
                 wordt=wordArrayList.get(0);
                 //xxtranslationsT = wordArrayList.get(0).getTranslations();
-                wordt.setTranslations(wordt.getTranslations());
+
+
+                //wordt.setTranslations(wordt.getTranslations());
             }
             else
             {
                 wordt.setWord(wordi);
                 //translationsT.add(new Translation(" szukaj w Google"));
-                translationsT=null;
+                //translationsT=null;
                 //System.out.println(wordi+" -> " + GoogleTranslate.translate("pl", wordi));
             }
 
@@ -78,7 +80,7 @@ public class TranslationController {
         }
         for (Word wtt:wordTranslationsAll
         ) {
-            System.out.println("wordTranslationsAll="+wtt);
+            System.out.println("LOOP TEST wordTranslationsAll="+wtt);
         }
 
 
@@ -101,17 +103,37 @@ public class TranslationController {
 
     @PostMapping("/saveTranslation")
     public String processForm(@ModelAttribute("translation") Translation theTranslation){
+    //public String processForm(@ModelAttribute("word") Word theWord, @ModelAttribute("translation") Translation theTranslation){
         System.out.println("+++ w saveTranslation +++ theTranslation="+theTranslation);
+
+        System.out.println("+++ w saveTranslation +++ theTranslation.getIdWord()="+theTranslation.getIdWord());
+
+//        if (theTranslation.getIdWord()!=0)
+//        {
+//            System.out.println("+++ w saveTranslation +++ kolejne tłumaczenie do word theTranslation.getIdWord()="+theTranslation.getIdWord());
+//        }
+//        else //trzeba dodać word
+//        {
+//            Word theWord = new Word();
+//            theWord.setWord("Strauss");
+//            theWord.setLanguage("eng");
+//            System.out.println("+++ w saveTranslation +++ pierwsze trzeba dodać word theWord="+theWord);
+//            wordService.addWord(theWord);
+//            System.out.println("+++ w saveTranslation +++ pierwsze trzeba dodać word theWord, pododaniu theWord.getId()="+theWord.getId());
+//            theTranslation.setIdWord(theWord.getId());
+//        }
+
         translationService.addTranslation(theTranslation);
         return "redirect:/word/list";
     }
 
-    @RequestMapping("/showFormForAdd")
-    public String formForAdd(@RequestParam("idWord") int idWord, @RequestParam("sentence") String sentence, Model model){
+    @RequestMapping("/showFormForAddTranslation")
+    public String formForAddTranslation(@RequestParam("idWord") int idWord, @RequestParam("theSentence") String theSentence, Model model){
+//      public String formForAdd(@RequestParam("theWord") Word theWord, @RequestParam("theSentence") String theSentence, Model model){
         System.out.println("++++ w showFormForAdd theTranslation ++++ idWord="+idWord);
         Translation theTranslation = new Translation();
         theTranslation.setIdWord(idWord);
-        theTranslation.setSentence(sentence);
+        theTranslation.setSentence(theSentence);
 
 
         //TODO
@@ -124,6 +146,25 @@ public class TranslationController {
         return "translation-form";
     }
 
+
+    @RequestMapping("/showFormForAddWord")
+    //public String formForAddWord(@RequestParam("idWord") int idWord, @RequestParam("theSentence") String theSentence, Model model){
+    public String formForAdd(@RequestParam("theWord") Word theWord, Model model){
+        System.out.println("++++ w showFormForAdd theTranslation ++++ theWord="+theWord);
+        //Translation theTranslation = new Translation();
+        //theTranslation.setIdWord(idWord);
+        //theTranslation.setSentence(theSentence);
+
+
+        //TODO
+        //theTranslation.setLanguage("eng");
+        //theTranslation.setIdSource(1);
+
+
+        //System.out.println("++++ w showFormForAdd theTranslation ++++ ="+theTranslation);
+        model.addAttribute("word", theWord);
+        return "word-form";
+    }
 
 
     /*

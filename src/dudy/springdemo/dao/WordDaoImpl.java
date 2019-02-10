@@ -48,7 +48,12 @@ public class WordDaoImpl implements WordDao {
         return words;
     }
 
-
+    @Override
+    public void addWord(Word theWord) {
+        Session session = sessionFactory.getCurrentSession();
+        System.out.println("+++ w addWord +++ theWord="+theWord);
+        session.saveOrUpdate(theWord);
+    }
 
     /*
     @Override

@@ -28,7 +28,16 @@ public class WordServiceImpl implements WordService {
     public List<Word> getWord(String item) {
         return wordDao.getWord(item);
     }
-/*
+
+    @Override
+    @Transactional
+    public void addWord(Word theWord) {
+        wordDao.addWord(theWord);
+    }
+
+
+
+    /*
     @Override
     @Transactional
     public void addCustomer(Customer theCustomer) {
