@@ -96,7 +96,7 @@ public class TranslationController {
     }
 
     @RequestMapping("/showFormForAddTranslation")
-    public String formForAddTranslation(@RequestParam("idWord") int idWord, @RequestParam("theSentence") String theSentence, Model model){
+    public String formForAddTranslation(@RequestParam("wordText") String wordText,@RequestParam("idWord") int idWord, @RequestParam("theSentence") String theSentence, Model model){
 //      public String formForAdd(@RequestParam("theWord") Word theWord, @RequestParam("theSentence") String theSentence, Model model){
         System.out.println("++++ w showFormForAdd ++++ idWord="+idWord);
         Translation theTranslation = new Translation();
@@ -108,7 +108,9 @@ public class TranslationController {
         theTranslation.setIdSource(1);
 
         System.out.println("++++ w showFormForAdd theTranslation ++++ ="+theTranslation);
+        model.addAttribute("wordText", wordText);
         model.addAttribute("translation", theTranslation);
+
         return "translation-form";
     }
 

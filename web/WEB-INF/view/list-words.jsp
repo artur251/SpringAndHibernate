@@ -79,6 +79,7 @@
 
                         <td>
                             <c:url var="insertTranslationLink" value="/word/showFormForAddTranslation">
+                                <c:param name="wordText" value="${theWord.wordText}"/>
                                 <c:param name="idWord" value="${theWord.id}"/>
                                 <c:param name="theSentence" value="${sentence}"/>
                             </c:url>
