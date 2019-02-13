@@ -1,6 +1,5 @@
 package dudy.springdemo.dao;
 
-import dudy.springdemo.entity.Translation;
 import dudy.springdemo.entity.Word;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -11,9 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * Created by admin on 11.11.2018.
- */
+
 @Repository
 public class WordDaoImpl implements WordDao {
     @Autowired

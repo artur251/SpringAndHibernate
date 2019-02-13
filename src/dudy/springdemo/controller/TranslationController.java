@@ -14,11 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Created by admin on 11.11.2018.
- */
+
 @Controller
-//@ControllerAdvice
 @RequestMapping("/word")
 public class TranslationController {
     @Autowired
@@ -43,10 +40,7 @@ public class TranslationController {
             sentenceWords.add(scanner.next());
         }
 
-        //xxList<WordTranslation> wordTranslationsAll =  new ArrayList<WordTranslation>();
-        //xxList<WordTranslation> wordTranslations =  new ArrayList<WordTranslation>();
         List<Word> wordTranslationsAll =  new ArrayList<Word>();
-
 
         for (String wordi:sentenceWords
         ) {
@@ -55,27 +49,17 @@ public class TranslationController {
             wordArrayList=wordService.getWord(wordi);
 
             Word wordt = new Word();
-            //List<Translation> translationsT = new ArrayList<Translation>();
+
 
             if (!wordArrayList.isEmpty()) {
                 wordt=wordArrayList.get(0);
-                //xxtranslationsT = wordArrayList.get(0).getTranslations();
-
-
-                //wordt.setTranslations(wordt.getTranslations());
             }
             else
             {
                 wordt.setWordText(wordi);
-                //translationsT.add(new Translation(" szukaj w Google"));
-                //translationsT=null;
-                //System.out.println(wordi+" -> " + GoogleTranslate.translate("pl", wordi));
             }
 
-            //xxwordTranslationsAll.add(new WordTranslation(wordt,translationsT));
             wordTranslationsAll.add(wordt);
-
-
 
         }
         for (Word wtt:wordTranslationsAll
@@ -105,23 +89,7 @@ public class TranslationController {
     public String processForm(@ModelAttribute("translation") Translation theTranslation){
     //public String processForm(@ModelAttribute("word") Word theWord, @ModelAttribute("translation") Translation theTranslation){
         System.out.println("+++ w saveTranslation +++ theTranslation="+theTranslation);
-
         System.out.println("+++ w saveTranslation +++ theTranslation.getIdWord()="+theTranslation.getIdWord());
-
-//        if (theTranslation.getIdWord()!=0)
-//        {
-//            System.out.println("+++ w saveTranslation +++ kolejne tłumaczenie do word theTranslation.getIdWord()="+theTranslation.getIdWord());
-//        }
-//        else //trzeba dodać word
-//        {
-//            Word theWord = new Word();
-//            theWord.setWordText("Strauss");
-//            theWord.setLanguage("eng");
-//            System.out.println("+++ w saveTranslation +++ pierwsze trzeba dodać word theWord="+theWord);
-//            wordService.addWord(theWord);
-//            System.out.println("+++ w saveTranslation +++ pierwsze trzeba dodać word theWord, pododaniu theWord.getId()="+theWord.getId());
-//            theTranslation.setIdWord(theWord.getId());
-//        }
 
         translationService.addTranslation(theTranslation);
         return "redirect:/word/list";
@@ -135,11 +103,9 @@ public class TranslationController {
         theTranslation.setIdWord(idWord);
         theTranslation.setSentence(theSentence);
 
-
         //TODO
         theTranslation.setLanguage("eng");
         theTranslation.setIdSource(1);
-
 
         System.out.println("++++ w showFormForAdd theTranslation ++++ ="+theTranslation);
         model.addAttribute("translation", theTranslation);
@@ -151,17 +117,11 @@ public class TranslationController {
     //public String formForAddWord(@RequestParam("idWord") int idWord, @RequestParam("theSentence") String theSentence, Model model){
     public String formForAddWord(@RequestParam("theWord") Word theWord, Model model){
         System.out.println("++++ w formForAddWord ++++ theWord="+theWord);
-        //Translation theTranslation = new Translation();
-        //theTranslation.setIdWord(idWord);
-        //theTranslation.setSentence(theSentence);
-
 
         //TODO
         //theTranslation.setLanguage("eng");
         //theTranslation.setIdSource(1);
 
-
-        //System.out.println("++++ w showFormForAdd theTranslation ++++ ="+theTranslation);
         model.addAttribute("word", theWord);
         return "word-form";
     }
@@ -173,23 +133,6 @@ public class TranslationController {
         //TODO
         theWord.setLanguage("eng");
 
-
-
-//        if (theTranslation.getIdWord()!=0)
-//        {
-//            System.out.println("+++ w saveTranslation +++ kolejne tłumaczenie do word theTranslation.getIdWord()="+theTranslation.getIdWord());
-//        }
-//        else //trzeba dodać word
-//        {
-//            Word theWord = new Word();
-//            theWord.setWordText("Strauss");
-//            theWord.setLanguage("eng");
-//            System.out.println("+++ w saveTranslation +++ pierwsze trzeba dodać word theWord="+theWord);
-//            wordService.addWord(theWord);
-//            System.out.println("+++ w saveTranslation +++ pierwsze trzeba dodać word theWord, pododaniu theWord.getId()="+theWord.getId());
-//            theTranslation.setIdWord(theWord.getId());
-//        }
-
         wordService.addWord(theWord);
         return "redirect:/word/list";
     }
@@ -200,8 +143,6 @@ public class TranslationController {
         translationService.deleteCustomer(theId);
         return "redirect:/customer/list";
     }
-
-
 
     @PostMapping("/search")
     public String loadCustomerByName(@RequestParam("theSearchName")String theName, Model model){

@@ -31,23 +31,6 @@ public class TranslationDaoImpl implements TranslationDao {
         return translations;
     }
 
-//    @Override
-//    public List<Translation> getTranslationsForIdWord(int idWordx) {
-//        //Session session = sessionFactory.getCurrentSession();
-//        Session session;
-//        try {
-//            session = sessionFactory.getCurrentSession();
-//        } catch (HibernateException e) {
-//            session = sessionFactory.openSession();
-//        }
-//
-//
-//        Query<Translation> query = session.createQuery("from Translation where idWord=:idWordx order by timestampUpdate", Translation.class);
-//        query.setInteger("idWordx", idWordx);
-//        List<Translation> translations = query.getResultList();
-//        return translations;
-//    }
-
     @Override
     public Translation getTranslationForIdTranslation (int idTranslation)
     {
